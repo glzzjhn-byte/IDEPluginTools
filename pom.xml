@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
     <name>IDE Plugin Tools</name>
-    <description>A lightweight plugin API for registering and dispatching UI extensions in custom IDE builds.</description>
+    <description>This tool is used to communicate between the Forge IDE and the developer, allowing UI extensions to seamlessly merge at runtime.</description>
     <url>https://github.com/glzzjhn-byte/IDEPluginTools</url>
 
     <licenses>
