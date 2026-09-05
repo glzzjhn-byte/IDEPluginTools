@@ -8,7 +8,6 @@ public final class PluginContext {
 
     private PluginContext() {}
 
-    /** Host IDE only — wires up what "current source file" means. Not for plugin devs. */
     public static void setCurrentSourceFileSupplier(Supplier<File> supplier) {
         currentSourceFileSupplier = supplier;
     }

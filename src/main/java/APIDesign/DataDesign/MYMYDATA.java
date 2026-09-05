@@ -81,14 +81,13 @@ public final class MYMYDATA {
     public PluginState getState()          { return state; }
     public void setState(PluginState s)    { this.state = s; }
 
-    // Grants only what trust level allows, regardless of what was requested.
     private Set<Capability> resolveGrantedCapabilities() {
         if (trust == TrustLevel.SANDBOXED) {
             Set<Capability> safe = EnumSet.of(Capability.READ_SOURCE, Capability.UI_NOTIFY);
             safe.retainAll(requestedCapabilities);
             return safe;
         }
-        return requestedCapabilities; // VERIFIED / SYSTEM get what they asked for
+        return requestedCapabilities; 
     }
 
     // ONE definition only — checks both lifecycle state and granted capability.
@@ -96,7 +95,6 @@ public final class MYMYDATA {
         return state == PluginState.ENABLED && resolveGrantedCapabilities().contains(c);
     }
 
-    /** Gated by capability — declared READ_SOURCE or you get null, not a crash. */
     public File SOURCE() {
         if (!has(Capability.READ_SOURCE)) return null;
         return PluginContext.getCurrentSourceFile();
@@ -110,8 +108,8 @@ public final class MYMYDATA {
         private String language;
         private boolean languageSet = false;
         private final Set<Capability> capabilities = EnumSet.noneOf(Capability.class);
-        private TrustLevel trust = TrustLevel.SANDBOXED;       // safest default — must opt UP into more trust
-        private ExecutionTimeout timeout = ExecutionTimeout.NORMAL; // safest default — bounded by default
+        private TrustLevel trust = TrustLevel.SANDBOXED;       
+        private ExecutionTimeout timeout = ExecutionTimeout.NORMAL; 
 
         public Builder id(String id)                   { this.id = id; return this; }
         public Builder version(String version)         { this.version = version; return this; }
