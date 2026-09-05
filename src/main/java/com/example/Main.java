@@ -1,5 +1,7 @@
 package com.example;
 
+import APIDesign.DataDesign.MYMYDATA;
+import APIDesign.DataDesign.ToolBrain;
 import APIDesign.PluginAction;
 import APIDesign.PluginBrain;
 
@@ -25,6 +27,23 @@ public class Main {
         PluginBrain.registerAction(formatterPlugin);
 
         System.out.println("✅ Plugins registered successfully!");
+
+        //HAVE OWN COMPILING
+        MYMYDATA data = new MYMYDATA.Builder()
+                .type(MYMYDATA.TargetData.RUN_COMPILING)
+                .ONRUN("HardwareSim-1.0.jar")
+                .build();
+
+        ToolBrain.registerTool(data);
+
+        PluginAction simButton = new PluginAction.Builder()
+                .type(PluginAction.TargetUI.TOOLBAR_RIGHT)
+                .label("RUN Hardware Simulation")
+                .tooltip("Run the current file through the hardware simulator")
+                .runJar(data.getMainJarFilename())
+                .build();
+
+        PluginBrain.registerAction(simButton);
 
         int sidebarCount = PluginBrain.getActionsFor(PluginAction.TargetUI.SIDEBAR_HEADER).size();
         int toolbarCount = PluginBrain.getActionsFor(PluginAction.TargetUI.TOOLBAR_RIGHT).size();
